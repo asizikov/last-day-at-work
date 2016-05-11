@@ -1,7 +1,6 @@
 ﻿open Octokit
 open System
 
-let token = "xxx"
 let organization = "org_name"
 let user = "user_name"
 
@@ -22,9 +21,9 @@ let contributedTo (client : GitHubClient, repo : Repository) = async {
 
 [<EntryPoint>]
 let main argv = 
-    let credentials = new Credentials(token);
-    let client = new GitHubClient(new ProductHeaderValue("tool"));
-    client.Credentials <- credentials
+    let token = System.Environment.GetEnvironmentVariable( "LAST_DAY_AT_WORK_OCTOKIT_OAUTHTOKEN" , EnvironmentVariableTarget.User)
+    let client = new GitHubClient(new ProductHeaderValue("LastDayAtWorkTool"));
+    client.Credentials <- Credentials(token)
 
     let repos = client 
                 |> getAllReposForOrganization 
