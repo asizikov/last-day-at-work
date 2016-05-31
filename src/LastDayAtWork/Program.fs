@@ -1,8 +1,9 @@
-﻿open Octokit
+﻿
+open Octokit
 open System
 
 let organization = "org_name"
-let user = "user_name"
+let user = "your_name"
 
 let getAllReposForOrganization (client : GitHubClient) = async {
     let! repos = client.Repository.GetAllForOrg(organization)  |> Async.AwaitTask
